@@ -26,6 +26,7 @@ CLASS zcl_ld_003_aithmetic_calc IMPLEMENTATION.
 *    TYPES t_result TYPE p LENGTH 8 DECIMALS 0.
 *    TYPES t_result TYPE i.
 
+    Data: lt_pippo TYPE t_result.
     DATA result_1 TYPE t_result.
 
 * Calculations
