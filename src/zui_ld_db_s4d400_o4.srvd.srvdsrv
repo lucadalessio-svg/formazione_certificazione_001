@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_LD_DB_S4D400'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_LD_DB_S4D400'
+  }
+}
+define service ZUI_LD_DB_S4D400_O4 provider contracts odata_v4_ui {
+  expose ZC_LD_DB_S4D400 as ZLD_CONNECTION;
+}

@@ -1,0 +1,63 @@
+managed implementation in class ZBP_R_LD_DB_S4D400 unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_LD_DB_S4D400 alias ZLD_CONNECTION
+persistent table zld_db_s4d400
+extensible
+draft table zld_db_s4d400_d
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global )
+{
+  field ( readonly )
+  UUID,
+  LocalCreatedBy,
+  LocalCreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  field ( numbering : managed )
+  UUID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare{
+                        validation CheckSemanticKey;
+                        validation CheckFlightPrice;
+                        determination GetCitiesInfo;
+                                }
+
+  mapping for zld_db_s4d400 corresponding extensible
+    {
+      UUID               = UUID;
+      CarrierID          = CARRIER_ID;
+      ConnectionID       = CONNECTION_ID;
+      AirportFromID      = AIRPORT_FROM_ID;
+      CityFrom           = CITY_FROM;
+      CountryFrom        = COUNTRY_FROM;
+      AirportToID        = AIRPORT_TO_ID;
+      CityTo             = CITY_TO;
+      CountryTo          = COUNTRY_TO;
+      Price              = PRICE;
+      Currency           = CURRENCY;
+      LocalCreatedBy     = LOCAL_CREATED_BY;
+      LocalCreatedAt     = LOCAL_CREATED_AT;
+      LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+      LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+      LastChangedAt      = LAST_CHANGED_AT;
+    }
+
+  validation CheckSemanticKey on save { create; update; }
+  validation CheckFlightPrice on save { create; update; }
+  determination GetCitiesInfo on save { field Price; }
+
+}
