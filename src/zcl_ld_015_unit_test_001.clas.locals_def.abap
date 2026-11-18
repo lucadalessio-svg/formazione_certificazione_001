@@ -27,7 +27,8 @@ CLASS lcl_prova_ld_01 DEFINITION.
                                    p_flag_use_default_im TYPE abap_boolean DEFAULT 'X',
 
       set_attributes IMPORTING pt_Data_to_save_im TYPE zld_db_my_conn_t OPTIONAL
-                     RAISING   cx_Abap_invalid_value,
+                     RAISING   cx_Abap_invalid_value
+                               cx_uuid_error,
 
       get_db_data IMPORTING pt_id_Carrier_r_im    TYPE ty_carrier_r_t OPTIONAL
                             pt_id_connection_r_im TYPE ty_connection_r_t OPTIONAL

@@ -1,23 +1,13 @@
-CLASS zcl_ld_001_hello_word DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZCL_LD_001_HELLO_WORD definition
+  public
+  create private .
 
-  PUBLIC SECTION.
-
-
-    INTERFACES if_oo_adt_classrun .
-
-  PROTECTED SECTION.
-  PRIVATE SECTION.
+public section.
+protected section.
+private section.
 ENDCLASS.
 
 
 
-CLASS zcl_ld_001_hello_word IMPLEMENTATION.
-
- METHOD if_oo_adt_classrun~main.
-  out->write( 'Hello world' ).
- endmethod.
-
+CLASS ZCL_LD_001_HELLO_WORD IMPLEMENTATION.
 ENDCLASS.

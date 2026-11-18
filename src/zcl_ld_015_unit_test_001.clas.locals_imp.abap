@@ -42,18 +42,20 @@ CLASS lcl_prova_ld_01 IMPLEMENTATION.
           COMMIT WORK AND WAIT.
         ENDIF.
       ENDIF.
+      TRY.
+          LOOP AT pt_data_to_save_im INTO DATA(ls_save).
 
-      LOOP AT pt_data_to_save_im INTO DATA(ls_save).
 
-*        IF sy-subrc = 0.
-        APPEND VALUE #( uuid = cl_system_uuid=>create_uuid_x16_static( )
-                        carrier_id = ls_Save-carrier_id
-                        connection_id = ls_save-connection_id
-                        airport_from_id = ls_save-airport_from_id
-                        airport_to_id   = ls_save-airport_to_id ) TO lt_zld_db_s4d400[].
-*      ENDIF.
-      ENDLOOP.
+            APPEND VALUE #( uuid = cl_system_uuid=>create_uuid_x16_static( )
+                            carrier_id = ls_Save-carrier_id
+                            connection_id = ls_save-connection_id
+                            airport_from_id = ls_save-airport_from_id
+                            airport_to_id   = ls_save-airport_to_id ) TO lt_zld_db_s4d400[].
 
+          ENDLOOP.
+        CATCH cx_uuid_error INTO DATA(lox_uuid_err).
+          RAISE EXCEPTION lox_uuid_err.
+      ENDTRY.
       MODIFY zld_db_s4d400 FROM TABLE @lt_zld_db_s4d400[].
 
       IF sy-subrc = 0.

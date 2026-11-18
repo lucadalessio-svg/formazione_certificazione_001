@@ -82,6 +82,8 @@ CLASS zcl_ld_015_unit_test_001 IMPLEMENTATION.
           out->write( |{ lo_cx_1->get_text(  ) } | ).
         CATCH cx_abap_sql_error INTO DATA(lo_cx_2).
           out->write( |{ lo_cx_2->get_text(  ) } | ).
+        CATCH cx_uuid_error INTO DATA(lo_cx_uuid).
+          out->write( |{ lo_cx_uuid->get_text( ) } | ).
       ENDTRY.
 
     ENDLOOP.
